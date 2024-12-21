@@ -1,5 +1,5 @@
 use std::io;
-fn main() {
+fn main() {  
     println!("guessing game");
 
     println!("pls input your guess");
