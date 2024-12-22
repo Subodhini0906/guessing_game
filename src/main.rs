@@ -1,5 +1,6 @@
 use std::{cmp::Ordering, io};
 use rand::Rng;
+use colored::*;
 fn main() {  
     println!("guessing game");
 
@@ -14,14 +15,17 @@ fn main() {
         io::stdin()
            .read_line(&mut guess)
            .expect("Failed to read line");
-        let guess:u32 =guess.trim().parse().expect("fail");
+        let guess:u32 =match guess.trim().parse(){
+            Ok(num)=>num,
+            Err(_)=>continue,
+        };
         println!("guess:{}",guess);
         
         match guess.cmp(&secret_num){
-            Ordering::Less=>println!("Too low !"),
-            Ordering::Greater=>println!("Too high!"),
+            Ordering::Less=>println!("{}","Too low !".red()),
+            Ordering::Greater=>println!("{}","Too high!".purple()),
             Ordering::Equal=>{
-                println!("win win!");
+                println!("{}","win win!".green());
                 break;
             },
         }
